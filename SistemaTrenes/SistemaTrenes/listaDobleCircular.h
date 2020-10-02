@@ -1,6 +1,7 @@
 #include<fstream>
 #include <iostream>
 #include <stdlib.h>
+#include<string>
 using namespace std;
 
 class nodo {
@@ -267,12 +268,11 @@ void listaDC::llenarListaPais() {
         exit(1);
     }
     while (!archivo.eof()) {
-        getline(archivo, texto);
+        getline(archivo,texto);
         int posPC = texto.find(";");
         int codPais = atoi(texto.substr(0, posPC).c_str());
         string nomPais = texto.substr(posPC + 1, texto.length());
         InsertarFinal(codPais, nomPais);
-        cout << endl;
     }
     archivo.close();
 }

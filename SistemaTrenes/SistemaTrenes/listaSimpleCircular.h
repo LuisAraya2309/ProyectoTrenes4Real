@@ -10,7 +10,7 @@ public:
         siguiente = NULL;
     }
 
-    nodo(int v, nodoCir* signodo)
+    nodoCir(int v, nodoCir* signodo)
     {
         valor = v;
         siguiente = signodo;
