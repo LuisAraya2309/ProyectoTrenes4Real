@@ -36,6 +36,7 @@ int main() {
 	paises.Mostrar();
 	cout << endl;
 	cout << "Ciudades" << endl;
+	paises.llenarListaCiudad();
 	return 0;
 }
 

@@ -298,7 +298,6 @@ void listaDC::llenarListaPais() {
 }
 
 void listaDC::llenarListaCiudad() {
-    listaDC listaCiudades;
     ifstream archivo;
     string texto;
     archivo.open("Ciudades.txt", ios::in);
@@ -308,6 +307,7 @@ void listaDC::llenarListaCiudad() {
     }
     while (!archivo.eof()) {
         getline(archivo, texto);
+        listaDC listaCiudades;
         int posPC = texto.find(";");
         int codPais = atoi(texto.substr(0, posPC).c_str());
         pnodo puntero = primero; bool flag = false;
@@ -320,11 +320,12 @@ void listaDC::llenarListaCiudad() {
                 puntero = puntero->siguiente;
             }
         }
+        
         if (flag) {
             string CiudadTotal = texto.substr(posPC + 1, texto.length());
-            int auxPC = texto.find(";");
+            int auxPC = CiudadTotal.find(";");
             int codCiudad = atoi(CiudadTotal.substr(0, auxPC).c_str());
-            string nomCiudad = CiudadTotal.substr(auxPC + 1, CiudadTotal.length());
+            string nomCiudad = CiudadTotal.substr(auxPC+1, CiudadTotal.length());
             pnodo auxiliar = primero;
             while (auxiliar->siguiente != primero) {
                 if (auxiliar->valor == codPais) {
@@ -337,11 +338,22 @@ void listaDC::llenarListaCiudad() {
             if (listaCiudades.ListaVacia()) {
                 listaCiudades.InsertarFinal(codCiudad, nomCiudad);
                 auxiliar->ciudad = listaCiudades.primero;
-                listaCiudades.primero->anterior = auxiliar;// vamos por acaaaaaaaaa
+                listaCiudades.primero->anterior = auxiliar;
             }
             else {
-                //hay que llenar el elseeeeeeeeeeeeeeeeeeeeeee
-                //validar que las ciudades no se repitan e insertarlas
+                pnodo puntero = listaCiudades.primero; bool flag = true;
+                while (puntero->siguiente != primero) {
+                    if (puntero->valor == codPais) {
+                        flag = false;
+                        break;
+                    }
+                    else {
+                        puntero = puntero->siguiente;
+                    }
+                }
+                if (flag) {
+                    listaCiudades.InsertarFinal(codCiudad, nomCiudad);
+                }
             }
 
         }
@@ -350,4 +362,5 @@ void listaDC::llenarListaCiudad() {
         }
 
     }
+    
 }
