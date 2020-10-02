@@ -38,7 +38,7 @@ typedef nodo* pnodo;
 class listaDC {
 public:
     listaDC() { primero = NULL; }
-    ~listaDC();
+    //~listaDC();
 
     void InsertarInicio(int v, string pais);
     void InsertarFinal(int v, string pais);
@@ -51,13 +51,14 @@ public:
     void BorrarInicio();
     void BorrarPosicion(int pos);
     int largoLista(); \
-        void llenarListaPais();
+    void llenarListaPais();
+    void llenarListaCiudad();
 
 private:
     pnodo primero;
 
 };
-
+/*
 listaDC::~listaDC()
 {
     pnodo aux;
@@ -70,7 +71,7 @@ listaDC::~listaDC()
         delete aux;
     }
 
-}
+}*/
 
 int listaDC::largoLista()
 {
@@ -272,7 +273,81 @@ void listaDC::llenarListaPais() {
         int posPC = texto.find(";");
         int codPais = atoi(texto.substr(0, posPC).c_str());
         string nomPais = texto.substr(posPC + 1, texto.length());
-        InsertarFinal(codPais, nomPais);
+        if (ListaVacia()) {
+            InsertarFinal(codPais, nomPais);
+        }
+        else {
+            pnodo puntero = primero; bool flag = true;
+            while (puntero->siguiente != primero) {
+                if (puntero->valor == codPais) {
+                    flag = false;
+                    break;
+                }
+                else {
+                    puntero = puntero->siguiente;
+                }
+            }
+            if (flag) {
+                InsertarFinal(codPais, nomPais);
+            }
+            
+        }
+        
     }
     archivo.close();
+}
+
+void listaDC::llenarListaCiudad() {
+    listaDC listaCiudades;
+    ifstream archivo;
+    string texto;
+    archivo.open("Ciudades.txt", ios::in);
+    if (archivo.fail()) {
+        cout << "No se pudo abrir el archivo";
+        exit(1);
+    }
+    while (!archivo.eof()) {
+        getline(archivo, texto);
+        int posPC = texto.find(";");
+        int codPais = atoi(texto.substr(0, posPC).c_str());
+        pnodo puntero = primero; bool flag = false;
+        while (puntero->siguiente != primero) {
+            if (puntero->valor == codPais) {
+                flag = true;
+                break;
+            }
+            else {
+                puntero = puntero->siguiente;
+            }
+        }
+        if (flag) {
+            string CiudadTotal = texto.substr(posPC + 1, texto.length());
+            int auxPC = texto.find(";");
+            int codCiudad = atoi(CiudadTotal.substr(0, auxPC).c_str());
+            string nomCiudad = CiudadTotal.substr(auxPC + 1, CiudadTotal.length());
+            pnodo auxiliar = primero;
+            while (auxiliar->siguiente != primero) {
+                if (auxiliar->valor == codPais) {
+                    break;
+                }
+                else {
+                    auxiliar = auxiliar->siguiente;
+                }
+            }
+            if (listaCiudades.ListaVacia()) {
+                listaCiudades.InsertarFinal(codCiudad, nomCiudad);
+                auxiliar->ciudad = listaCiudades.primero;
+                listaCiudades.primero->anterior = auxiliar;// vamos por acaaaaaaaaa
+            }
+            else {
+                //hay que llenar el elseeeeeeeeeeeeeeeeeeeeeee
+                //validar que las ciudades no se repitan e insertarlas
+            }
+
+        }
+        else {
+            continue;
+        }
+
+    }
 }

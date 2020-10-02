@@ -32,7 +32,10 @@ using namespace std;
 int main() {
 	listaDC paises;
 	paises.llenarListaPais();
+	cout << "Lista de Paises: " << endl;
 	paises.Mostrar();
+	cout << endl;
+	cout << "Ciudades" << endl;
 	return 0;
 }
 
