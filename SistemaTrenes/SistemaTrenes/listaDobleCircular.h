@@ -307,7 +307,6 @@ void listaDC::llenarListaCiudad() {
     }
     while (!archivo.eof()) {
         getline(archivo, texto);
-        listaDC listaCiudades;
         int posPC = texto.find(";");
         int codPais = atoi(texto.substr(0, posPC).c_str());
         pnodo puntero = primero; bool flag = false;
@@ -335,33 +334,38 @@ void listaDC::llenarListaCiudad() {
                     auxiliar = auxiliar->siguiente;
                 }
             }
-            if (listaCiudades.ListaVacia()) {
-                cout << "Entre en el if" << endl;
-                listaCiudades.InsertarFinal(codCiudad, nomCiudad);
-                auxiliar->ciudad = listaCiudades.primero;
-                listaCiudades.primero->anterior = auxiliar;
+            if ((puntero->ciudad==NULL)) {
+                cout << "Primera Ciudad: " << endl;
+                pnodo nuevo = new nodo(codCiudad, nomCiudad);
+                nuevo->anterior = puntero;
+                puntero->ciudad = nuevo;
             }
             else {
-                cout << "Entre en el else" << endl;
-                pnodo puntero = listaCiudades.primero; bool flag = true;
-                while (puntero->siguiente != primero) {
-                    if (puntero->valor == codPais) {
+                cout << "Else: " << endl;
+
+                bool flag = true;
+                pnodo punteroAux = puntero;
+                while (punteroAux->siguiente != punteroAux) {
+                    if (punteroAux->valor == codCiudad) {
                         flag = false;
                         break;
                     }
                     else {
-                        puntero = puntero->siguiente;
+                        punteroAux = punteroAux->siguiente;
                     }
                 }
                 if (flag) {
-                    listaCiudades.InsertarFinal(codCiudad, nomCiudad);
+                    pnodo nuevo = new nodo(codCiudad, nomCiudad);
+                    nuevo->anterior = puntero->anterior;
+                    nuevo->siguiente = puntero->anterior->siguiente;
+                    puntero->anterior->siguiente = nuevo;
+                    puntero->anterior = nuevo;
                 }
             }
         }
         else {
             continue;
         }
-        listaCiudades.Mostrar();
     }
 }
 /*Error cada vez que se reinicia la Lista entonces las ciudades de un mismo 

@@ -9,8 +9,8 @@
 20;321;Brno
 456;274;Munich
 456;312;Dresde
-15;145;Barceona
-15;111;Andorra
+15;145;Barcelona
+15;111;Madrid
 37;765;Moscu
 37;654;SanPetesburgo
 21;895;Amsterdan
