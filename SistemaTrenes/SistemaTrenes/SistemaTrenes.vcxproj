@@ -143,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cola.h" />
+    <ClInclude Include="Header1.h" />
+    <ClInclude Include="Header2.h" />
+    <ClInclude Include="Header3.h" />
+    <ClInclude Include="Header4.h" />
     <ClInclude Include="listaDoble.h" />
     <ClInclude Include="listaDobleCircular.h" />
     <ClInclude Include="listaSimple.h" />

@@ -335,17 +335,16 @@ void listaDC::llenarListaCiudad() {
                 }
             }
             if ((puntero->ciudad==NULL)) {
-                cout << "Primera Ciudad: " << endl;
+                cout << "Primera Ciudad: "<<nomCiudad<< endl;
                 pnodo nuevo = new nodo(codCiudad, nomCiudad);
                 nuevo->anterior = puntero;
                 puntero->ciudad = nuevo;
             }
             else {
-                cout << "Else: " << endl;
-
+                cout << "No soy segunda ciudad: "<<nomCiudad<< endl;
                 bool flag = true;
                 pnodo punteroAux = puntero;
-                while (punteroAux->siguiente != punteroAux) {
+                while (punteroAux->siguiente != puntero) {
                     if (punteroAux->valor == codCiudad) {
                         flag = false;
                         break;
@@ -360,6 +359,8 @@ void listaDC::llenarListaCiudad() {
                     nuevo->siguiente = puntero->anterior->siguiente;
                     puntero->anterior->siguiente = nuevo;
                     puntero->anterior = nuevo;
+                    cout << "Agregado nuevo nodo al pais: " << codPais << " Con la ciudad: " << nomCiudad << endl;
+
                 }
             }
         }
