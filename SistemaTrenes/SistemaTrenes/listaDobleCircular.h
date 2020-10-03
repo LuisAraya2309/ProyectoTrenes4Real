@@ -336,11 +336,13 @@ void listaDC::llenarListaCiudad() {
                 }
             }
             if (listaCiudades.ListaVacia()) {
+                cout << "Entre en el if" << endl;
                 listaCiudades.InsertarFinal(codCiudad, nomCiudad);
                 auxiliar->ciudad = listaCiudades.primero;
                 listaCiudades.primero->anterior = auxiliar;
             }
             else {
+                cout << "Entre en el else" << endl;
                 pnodo puntero = listaCiudades.primero; bool flag = true;
                 while (puntero->siguiente != primero) {
                     if (puntero->valor == codPais) {
@@ -355,12 +357,12 @@ void listaDC::llenarListaCiudad() {
                     listaCiudades.InsertarFinal(codCiudad, nomCiudad);
                 }
             }
-
         }
         else {
             continue;
         }
-
+        listaCiudades.Mostrar();
     }
-    
 }
+/*Error cada vez que se reinicia la Lista entonces las ciudades de un mismo 
+país se quedan fuera.*/
