@@ -53,6 +53,7 @@ public:
     int largoLista(); \
     void llenarListaPais();
     void llenarListaCiudad();
+    void llenarListaConexiones;
 
 private:
     pnodo primero;
@@ -369,5 +370,8 @@ void listaDC::llenarListaCiudad() {
         }
     }
 }
-/*Error cada vez que se reinicia la Lista entonces las ciudades de un mismo 
-país se quedan fuera.*/
+void listaDC::llenarListaConexiones() {
+
+
+
+}

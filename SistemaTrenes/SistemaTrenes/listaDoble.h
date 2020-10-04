@@ -4,22 +4,32 @@ using namespace std;
 
 class nodoDoble {
 public:
-    nodoDoble(string v)
+    nodoDoble(int codConexion,int codPais,int codCiudad,int tiempo)
     {
-        valor = v;
+        codConexion = codConexion;
+        codPais = codPais;
+        codCiudad = codCiudad;
+        tiempo = tiempo;
         siguiente = NULL;
         anterior = NULL;
     }
 
-    nodoDoble(string v, nodoDoble* signodoDoble)
+    nodoDoble(int codConexion, int codPais, int codCiudad, int tiempo, nodoDoble* signodoDoble, nodoDoble* sigantDoble)
     {
-        valor = v;
+        codConexion = codConexion;
+        codPais = codPais;
+        codCiudad = codCiudad;
+        tiempo = tiempo;
         siguiente = signodoDoble;
+        anterior = sigantDoble;
     }
-    string valor;
+private:
+    int codConexion;
+    int codPais;
+    int codCiudad;
+    int tiempo;
     nodoDoble* siguiente;
     nodoDoble* anterior;
-
 
     friend class listaD;
 };
