@@ -41,10 +41,9 @@ public:
     listaD() { primero = NULL; }
     ~listaD();
 
-    void InsertarInicio(string v);
-    void InsertarFinal(string v);
+    void InsertarInicio(int codConexion, int codPais, int codCiudad, int tiempo);
+    void InsertarFinal(int codConexion, int codPais, int codCiudad, int tiempo);
     bool ListaVacia() { return primero == NULL; }
-    void Imprimir();
     void Mostrar();
     int largoLista();
     pnodoDoble primero;
@@ -81,24 +80,24 @@ int listaD::largoLista() {
 
 }
 
-void listaD::InsertarInicio(string v)
+void listaD::InsertarInicio(int codConexion, int codPais, int codCiudad, int tiempo)
 {
     if (ListaVacia()) {
-        primero = new nodoDoble(v);
+        primero = new nodoDoble(codConexion, codPais, codCiudad, tiempo);
     }
     else
     {
         pnodoDoble aux = primero;
-        primero = new nodoDoble(v, primero);
+        primero = new nodoDoble(codConexion, codPais, codCiudad, tiempo);
         aux->anterior = primero;
     }
 
 }
 
-void listaD::InsertarFinal(string v)
+void listaD::InsertarFinal(int codConexion, int codPais, int codCiudad, int tiempo)
 {
     if (ListaVacia()) {
-        primero = new nodoDoble(v);
+        primero = new nodoDoble(codConexion, codPais, codCiudad, tiempo);
     }
     else
     {
@@ -106,7 +105,7 @@ void listaD::InsertarFinal(string v)
         while (aux->siguiente != NULL) {
             aux = aux->siguiente;
         }
-        pnodoDoble nuevo = new nodoDoble(v);
+        pnodoDoble nuevo = new nodoDoble(codConexion, codPais, codCiudad, tiempo);
         aux->siguiente = nuevo;
         nuevo->anterior = aux;
 
@@ -118,7 +117,7 @@ void listaD::Mostrar()
 
     aux = primero;
     while (aux) {
-        cout << aux->valor << "-> ";
+        cout << aux->codConexion << "-" << aux->codPais << "-" << aux->codCiudad << aux->tiempo << "->";
         aux = aux->siguiente;
     }
     cout << endl;
