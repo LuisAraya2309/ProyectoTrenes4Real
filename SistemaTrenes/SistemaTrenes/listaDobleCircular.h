@@ -29,8 +29,6 @@ private:
     nodo* ciudad;
     nodo* siguiente;
     nodo* anterior;
-
-
     friend class listaDC;
 };
 typedef nodo* pnodo;
@@ -53,7 +51,7 @@ public:
     int largoLista(); \
     void llenarListaPais();
     void llenarListaCiudad();
-    void llenarListaConexiones;
+    void llenarListaConexiones();
 
 private:
     pnodo primero;
@@ -371,7 +369,126 @@ void listaDC::llenarListaCiudad() {
     }
 }
 void listaDC::llenarListaConexiones() {
+    ifstream archivo;
+    string texto;
+    archivo.open("Conexiones.txt", ios::in);
+    if (archivo.fail()) {
+        cout << "No se pudo abrir el archivo";
+        exit(1);
+    }
+    while (!archivo.eof()) {
+        getline(archivo, texto);
+        int posPC = texto.find(";");
+        int codPais = atoi(texto.substr(0, posPC).c_str());
+        pnodo puntero = primero; bool flag = false;
+        while (puntero->siguiente != primero) {
+            if (puntero->valor == codPais) {
+                flag = true;
+                break;
+            }
+            else {
+                puntero = puntero->siguiente;
+            }
+        }
+        if (flag) {
+
+            //cout << "Estoy entrando al pais: "<<puntero->pais << endl;
+
+            string ConexionTotal = texto.substr(posPC + 1, texto.length());
+            int posPC2 = ConexionTotal.find(";");
+            int codCiudad = atoi((ConexionTotal.substr(0, posPC2).c_str()));
+
+            pnodo ciudades = puntero->ciudad; bool flag2=false;
+
+            while (ciudades->siguiente != puntero) {
+                if (ciudades->valor == codCiudad) {
+                    flag2 = true;
+                    break;
+                }
+                else {
+                    ciudades = ciudades->siguiente;
+                }
+            }
+            if (flag2) {
+
+                //cout << "Estoy entrando a la ciudad: " << ciudades->pais << endl;
+
+                string Conexion = ConexionTotal.substr(posPC2 + 1, ConexionTotal.length());
+                int posPC3 = Conexion.find(";");
+                int codConexion = atoi((Conexion.substr(0, posPC3).c_str()));
+
+                string ConexionPais = Conexion.substr(posPC3 + 1, Conexion.length());
+                int posPC4 = ConexionPais.find(";");
+                int codPais = atoi((ConexionPais.substr(0, posPC4).c_str()));
+
+                string ConexionCiudad = ConexionPais.substr(posPC4 + 1, ConexionPais.length());
+                int posPC5 = ConexionCiudad.find(";");
+                int codCiudad = atoi((ConexionCiudad.substr(0, posPC5).c_str()));
+
+                string Tiempo = ConexionCiudad.substr(posPC5 + 1, ConexionCiudad.length());
+                int posPC6 = Tiempo.find(";");
+                int codTiempo = atoi((Tiempo.substr(0, posPC6).c_str()));
+                /*
+                cout << "Codigo conexion: "<<codConexion << endl;
+                cout << "Codigo de Pais: "<<codPais << endl;
+                cout << "Codigo Ciudad: "<<codCiudad << endl;
+                cout << "Tiempo: "<<codTiempo << endl;
+                */
+
+                pnodo paisesAux = primero; bool bandera = false;
+                while (paisesAux->siguiente!=primero) {
+                    if (paisesAux->valor==codPais) {
+                        bandera = true;
+                        break;
+                    }
+                    else {
+                        paisesAux = paisesAux->siguiente;
+                    }
+
+                }
+                if (bandera) {
+                    pnodo ciudadesAux = paisesAux->ciudad; bool banderix = false;
+                    while (ciudadesAux->siguiente!=paisesAux) {
+                        if (ciudadesAux->valor==codCiudad) {
+                            banderix = true;
+                            break;
+                        }
+                        else {
+                            ciudadesAux = ciudadesAux->siguiente;
+                        }
+
+                    }
+                    if (banderix) {
+                        pnodoDoble aux = ciudadesAux;
+                        while (aux->siguiente != NULL) {
+                            aux = aux->siguiente;
+                        }
+                        pnodoDoble nuevo = new nodoDoble(codConexion, codPais, codCiudad, tiempo);
+                        aux->siguiente = nuevo;
+                        nuevo->anterior = aux;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else {
+                    continue;
+                }
+
+            }
+            else {
+                continue;
+            }
+        }
+        else {
+            continue;
+        }
 
 
+
+
+
+
+    }
 
 }

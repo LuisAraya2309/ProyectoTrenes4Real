@@ -37,6 +37,8 @@ int main() {
 	cout << endl;
 	cout << "Ciudades" << endl;
 	paises.llenarListaCiudad();
+	cout << "Conexiones: " << endl;
+	paises.llenarListaConexiones();
 	return 0;
 }
 
