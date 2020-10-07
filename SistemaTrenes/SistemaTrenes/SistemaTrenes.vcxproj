@@ -143,14 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cola.h" />
-    <ClInclude Include="Header1.h" />
-    <ClInclude Include="Header2.h" />
-    <ClInclude Include="Header3.h" />
-    <ClInclude Include="Header4.h" />
+    <ClInclude Include="Admin.h" />
+    <ClInclude Include="Usuario.h" />
+    <ClInclude Include="Tipo-Tren.h" />
+    <ClInclude Include="Trenes.h" />
     <ClInclude Include="listaDoble.h" />
-    <ClInclude Include="listaDobleCircular.h" />
-    <ClInclude Include="listaSimple.h" />
-    <ClInclude Include="listaSimpleCircular.h" />
+    <ClInclude Include="Pais-Ciudad.h" />
+    <ClInclude Include="CodigosRuta.h" />
+    <ClInclude Include="Rutas.h" />
     <ClInclude Include="Pila.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

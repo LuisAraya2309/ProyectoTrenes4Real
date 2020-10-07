@@ -3,12 +3,16 @@
 //Incluimos todos los headers
 
 #include <iostream>
-#include "listaSimple.h"
-#include "listaSimpleCircular.h"
-#include "listaDobleCircular.h"
+#include "CodigosRuta.h"
+#include "Rutas.h"
+#include "Pais-Ciudad.h"
 #include "listaDoble.h"
 #include "Pila.h"
 #include "Cola.h"
+#include "Admin.h"
+#include "Usuario.h"
+#include"Tipo-Tren.h"
+#include "Trenes.h"
 #include<stdlib.h>
 #include<string.h>
 #include<fstream>
@@ -31,14 +35,27 @@ using namespace std;
 
 int main() {
 	listaDC paises;
+	listaC rutas;
+	listaC2 admin;
+	listaDCUsuario usuario;
 	paises.llenarListaPais();
-	cout << "Lista de Paises: " << endl;
-	paises.Mostrar();
+	//paises.Mostrar();
+	//cout << "Lista de Paises: " << endl;
+	//paises.ConsultarPaises();
 	cout << endl;
 	cout << "Ciudades" << endl;
 	paises.llenarListaCiudad();
-	cout << "Conexiones: " << endl;
+	paises.Mostrar();
+	paises.ConsultarCiudades();
+	/*cout << "Conexiones: " << endl;
 	paises.llenarListaConexiones();
+	cout << "Rutas: " << endl;
+	rutas.llenarListaRutas();
+	cout << "Administradores: " << endl;
+	admin.llenarListaAdmin();
+	admin.Mostrar();
+	cout << "Usuarios: " << endl;
+	usuario.llenarListaUsuario();*/
 	return 0;
 }
 
